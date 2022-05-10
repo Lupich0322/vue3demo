@@ -4,26 +4,35 @@ import { reactive } from 'vue'
 
 const user = reactive ({})
 
+const rules = reactive({
+    username:[{
+        required:true,message:'用户名不能为空',trigger:'blur'
+    }],
+    password:[{
+        required:true,message:'密码不能为空',trigger:'blur'
+    }]
+})
+
 const login = () => {
-    console.log(user);
+    console.log(user)
 }
 </script>
 
 <template>
     <div class="login-content">
         <div class="modal">
-            <el-from :modal="user"> 
+            <el-form :model="user" :rules="rules" status-icon> 
                 <div class="login-title">登录</div>
-                <el-form-item>
+                <el-form-item prop="username">
                     <el-input type="text" :prefix-icon="Avatar" v-model="user.username"></el-input>
                 </el-form-item>
-                <el-form-item>
+                <el-form-item prop="password">
                     <el-input type="password" :prefix-icon="View" v-model="user.password"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" class="login-btn" @click="login">登录</el-button>
                 </el-form-item>
-            </el-from>
+            </el-form>
         </div>
     </div>
 </template>
