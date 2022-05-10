@@ -1,8 +1,10 @@
 <script setup>
 import { Avatar,View } from '@element-plus/icons-vue'
-import { reactive } from 'vue'
+import { reactive , ref } from 'vue'
 
 const user = reactive ({})
+
+const loginForm = ref(null)
 
 const rules = reactive({
     username:[{
@@ -14,14 +16,21 @@ const rules = reactive({
 })
 
 const login = () => {
-    console.log(user)
+// 提交前校验
+    loginForm.value.validate((valid) => {
+        if(valid){
+            console.log(user)
+        }else{
+            return false
+        }
+    })
 }
 </script>
 
 <template>
     <div class="login-content">
         <div class="modal">
-            <el-form :model="user" :rules="rules" status-icon> 
+            <el-form :model="user" :rules="rules" status-icon ref="loginForm"> 
                 <div class="login-title">登录</div>
                 <el-form-item prop="username">
                     <el-input type="text" :prefix-icon="Avatar" v-model="user.username"></el-input>
