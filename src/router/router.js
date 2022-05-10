@@ -7,7 +7,7 @@ import Index from '../views/index.vue'
 // 我们后面再讨论嵌套路由。
 const routes = [
   { path: '/', name: 'Index', component: Index },
-//   { path: '/p2', name: 'Page2', component: () => import('../views/page2.vue') }
+  { path: '/loginView', name: 'loginView', component: () => import('../views/loginView.vue') }
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
