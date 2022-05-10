@@ -1,7 +1,7 @@
 <script setup>
 import { Avatar,View } from '@element-plus/icons-vue'
 import { reactive , ref } from 'vue'
-
+import userApi from '../api/userApi';
 const user = reactive ({})
 
 const loginForm = ref(null)
@@ -19,7 +19,9 @@ const login = () => {
 // 提交前校验
     loginForm.value.validate((valid) => {
         if(valid){
-            console.log(user)
+            userApi.login(user).then((res) => {
+                console.log(res)
+            })
         }else{
             return false
         }
