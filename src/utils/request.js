@@ -18,9 +18,9 @@ service.interceptors.request.use(function(config){
 
 service.interceptors.response.use(function(response){
     const { msg , code , data } =response.data
-    if(code == 200){
+    if(code === 200){
         return data
-    }else if(code == 402){
+    }else if(code === 402){
         ElMessage.error(msg)
         return Promise.reject(msg)
     }else{
@@ -36,7 +36,7 @@ service.interceptors.response.use(function(response){
 function request (options) {
     options.method = options.method || 'get'
     if(options.method.toLowerCase() === 'get'){
-        options.params = option.data
+        options.params = options.data
     }
     return service(options)
 }
