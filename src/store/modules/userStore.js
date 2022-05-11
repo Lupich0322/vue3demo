@@ -1,17 +1,17 @@
-// import storage from "../../utils/storage"
+import { shouldTransformRef } from "vue/compiler-sfc"
+import storage from "../../utils/storage"
 
 const userStore = {
     namespaced: true,
     state:() => {
         return {
-            username:'Lupic',
-            age:798456123
+            userInfo: ''|| storage.getItem("userinfo")
         }
     },
     mutations:{
-        changeUserName:(state,params) => {
-            // storage.setItem('username',params)
-            state.username = params
+        saveUserInfoCommit:(state,params) => {
+            storage.setItem('username',params)
+            state.userInfo = params
         }
     },
     getters:{
@@ -20,7 +20,9 @@ const userStore = {
         }
     },
     actions:{
-
+        saveUserInfoAction:(store,params) => {
+            store.commit('saveUserInfoCommit',params);
+        }
     }
 }
 

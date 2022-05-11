@@ -1,7 +1,13 @@
 <script setup>
 import { Avatar,View } from '@element-plus/icons-vue'
-import { reactive , ref } from 'vue'
-import userApi from '../api/userApi';
+import { reactive , ref , getCurrentInstance} from 'vue'
+import { useStore } from 'vuex'
+import userApi from '../api/userApi'
+
+const { proxy }=getCurrentInstance()
+
+const store = useStore();
+
 const user = reactive ({})
 
 const loginForm = ref(null)
@@ -20,7 +26,9 @@ const login = () => {
     loginForm.value.validate((valid) => {
         if(valid){
             userApi.login(user).then((res) => {
-                console.log(res)
+                // 将登录成功的信息由vuex管理
+                store.dispatch('userStore/saveUserInfoAction', res)
+                proxy.$router.push('/')
             })
         }else{
             return false

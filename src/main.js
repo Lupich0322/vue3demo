@@ -12,7 +12,7 @@ const app = createApp(App)
 //   app.component(iconName , ElIconModules[iconName])
 // }
 
-
+app.config.globalProperties.$router = router
 app.use(router)
 app.use(store)
 app.use(ElementPlus)
